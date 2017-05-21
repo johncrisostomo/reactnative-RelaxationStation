@@ -11,10 +11,13 @@ import {
 import StartScreen from './src/components/StartScreen';
 import QuoteScreen from './src/components/QuoteScreen';
 
+const { quotes } = require('./quotes.json');
+
 const zenImage = require('./assets/zen.png');
 
 export default class RelaxationStation extends Component {
   render() {
+    const quote = quotes[3];
     return (
       <Navigator
         initialRoute={{ name: 'StartScreen' }}
@@ -23,7 +26,7 @@ export default class RelaxationStation extends Component {
             case 'StartScreen':
               return <StartScreen onStartHandler={() => navigator.push({ name: 'QuoteScreen' })} />;
             case 'QuoteScreen':
-              return <QuoteScreen />;
+              return <QuoteScreen text={quote.text} source={quote.source} />;
           }
         }}
       />
