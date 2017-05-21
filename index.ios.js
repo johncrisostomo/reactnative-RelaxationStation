@@ -51,6 +51,7 @@ export default class RelaxationStation extends Component {
               return <StartScreen onStartHandler={() => navigator.push({ name: 'QuoteScreen' })} />;
             case 'QuoteScreen':
               return <QuoteScreen
+                qId={this.state.quoteIndex}
                 text={quote.text}
                 source={quote.source}
                 onNextQuotePress={this._incrementQuoteIndex}/>;
