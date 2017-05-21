@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
       'AvenirNext-Bold' : 'Roboto',
     fontSize: 36,
     color: '#ffffff',
+    backgroundColor: 'transparent',
     marginVertical: 30,
   },
   sourceText: {
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
       'AvenirNext-Italic' : 'Roboto',
     fontSize: 20,
     color: '#F8F8F8',
+    backgroundColor: 'transparent',
     textAlign: 'right',
     fontStyle: 'italic',
   },

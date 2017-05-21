@@ -9,6 +9,7 @@ import Quote from './Quote';
 import NextQuoteButton from './NextQuoteButton';
 
 const bgImage = require('../../assets/bg.png');
+const { quotes } = require('../../quotes.json');
 
 const tranquil = {
   duration: 500,
@@ -30,29 +31,49 @@ const tranquil = {
 };
 
 export default class QuoteScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      quoteIndex: 2,
+    },
+
+    this._incrementQuoteIndex = this._incrementQuoteIndex.bind(this);
+  }
+
   componentWillUpdate() {
     LayoutAnimation.configureNext(tranquil);
   }
 
+  _incrementQuoteIndex() {
+    let newIndex;
+
+    if (this.state.quoteIndex + 1 === quotes.length) {
+      newIndex = 0;
+    } else {
+      newIndex = this.state.quoteIndex + 1;
+    }
+
+    this.setState({
+      quoteIndex: newIndex,
+    });
+  }
+
   render() {
-    const { text, source, qId } = this.props;
+    const quote = quotes[this.state.quoteIndex];
+
     return (
       <Image source={bgImage} style={styles.backgroundContainer}>
         <View style={styles.container}>
-          <Quote key={qId} quoteText={text} quoteSource={source} />
-          <NextQuoteButton onPress={this.props.onNextQuotePress} />
+          <Quote key={this.state.quoteIndex}
+            quoteText={quote.text}
+            quoteSource={quote.source} />
+          <NextQuoteButton onPress={this._incrementQuoteIndex} />
         </View>
       </Image>
     );
   }
 }
-
-QuoteScreen.propTypes = {
-  text: PropTypes.string.isRequired,
-  source: PropTypes.string.isRequired,
-  onNextQuotePress: PropTypes.func.isRequired,
-  qId: PropTypes.number.isRequired,
-};
 
 const styles = StyleSheet.create({
   backgroundContainer: {

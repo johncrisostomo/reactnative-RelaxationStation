@@ -10,10 +10,21 @@ import {
 const zenImage = require('../../assets/zen.png');
 
 export default class StartScreen extends Component {
+  static navigationOptions = {
+    title: 'RelaxationStation',
+  };
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={this.props.onStartHandler}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigate('QuoteScreen')} >
           <Image source={zenImage} style={styles.buttonImage} />
           <Text style={styles.readyText}>I am ready to relax. . .</Text>
         </TouchableOpacity>
