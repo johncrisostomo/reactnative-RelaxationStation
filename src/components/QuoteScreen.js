@@ -5,6 +5,7 @@ import {
   Image,
 } from 'react-native';
 import Quote from './Quote';
+import NextQuoteButton from './NextQuoteButton';
 
 const bgImage = require('../../assets/bg.png');
 
@@ -15,6 +16,7 @@ export default class QuoteScreen extends Component {
       <Image source={bgImage} style={styles.backgroundContainer}>
         <View style={styles.container}>
           <Quote quoteText={text} quoteSource={source} />
+          <NextQuoteButton onPress={this.props.onNextQuotePress} />
         </View>
       </Image>
     );
@@ -24,6 +26,7 @@ export default class QuoteScreen extends Component {
 QuoteScreen.propTypes = {
   text: PropTypes.string.isRequired,
   source: PropTypes.string.isRequired,
+  onNextQuotePress: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
