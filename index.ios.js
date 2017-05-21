@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Navigator } from 'react-native-deprecated-custom-components';
 import {
   AppRegistry,
   StyleSheet,
@@ -7,20 +8,25 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import Quote from './src/components/Quote';
+import StartScreen from './src/components/StartScreen';
+import QuoteScreen from './src/components/QuoteScreen';
 
 const zenImage = require('./assets/zen.png');
 
 export default class RelaxationStation extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        {/* <TouchableOpacity style={styles.button} onPress={() => { alert('I was pressed!') }}>
-          <Image source={zenImage} style={styles.buttonImage} />
-        </TouchableOpacity>
-        <Text style={styles.readyText}>I am ready to relax. . .</Text> */}
-        <Quote quoteText="Amazing quote!" quoteSource="- Great source"/>
-      </View>
+      <Navigator
+        initialRoute={{ name: 'StartScreen' }}
+        renderScene={(route, navigator) => {
+          switch (route.name) {
+            case 'StartScreen':
+              return <StartScreen onStartHandler={() => navigator.push({ name: 'QuoteScreen' })} />;
+            case 'QuoteScreen':
+              return <QuoteScreen />;
+          }
+        }}
+      />
     );
   }
 }
